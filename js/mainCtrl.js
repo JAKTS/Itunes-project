@@ -12,7 +12,9 @@ angular.module('itunes').controller('mainCtrl', function($scope, itunesService){
         {field: 'collectionName', displayName: 'Collection'},
         {field: 'artworkUrl60', displayName: 'Album Art', width: '110px', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><img src="{{row.getProperty(col.field)}}"></div>'},
         {field: 'kind', displayName: 'Type'},
-        {field: 'collectionPrice', displayName: 'Collection Price'},
+        {field: 'collectionPrice | currency', displayName: 'Collection Price'},
+        {field: 'artistViewUrl', displayName: 'Artist Bio', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a href="{{row.getProperty(col.field)}}"target="_blank">Artist</a></div>'}
+
       ]
   };
 
@@ -31,6 +33,7 @@ angular.module('itunes').controller('mainCtrl', function($scope, itunesService){
     $scope.getSongData = function(artist){
       itunesService.getArtist(artist).then(function(response){
         $scope.songData = response;
+        console.log(response);
       });
     };
 
